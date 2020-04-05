@@ -3,11 +3,11 @@ import random
 pygame.init()
 screen = pygame.display.set_mode((600, 600))
 background_image = pygame.image.load("background.png")
-
+score=0
 bullet_image = pygame.image.load("bullet.png")
 bullet_y = 600
 bullet_x = 0 
-bullet_dy = 3
+bullet_dy = 6
 
 player_image = pygame.image.load("player.png")
 player_x = 260
@@ -22,10 +22,14 @@ enemy_dy = 30
 strike = False
 press = False
 fire = False
-
+font = pygame.font.SysFont('Times new roman', 32) 
 def player(x, y): screen.blit(player_image,(x,y))
 def enemy(x, y): screen.blit(enemy_image,(x,y))
 def bullet(x,y): screen.blit(bullet_image,(x,y))
+def scores (x,y):
+    res = font.render('s c o r e:  ' + str(score), True, (255, 255, 0)) #draw text on a new Surf
+    screen.blit(res, (x,y))
+
 
 done = False
 while not done:
@@ -44,6 +48,7 @@ while not done:
         bullet_x = 600
         strike = True
         enemy_x, enemy_y = random.randint(0, 534), random.randint(20, 50)
+        score+=1
 
     if bullet_y == 0:
         fire = False
@@ -64,5 +69,5 @@ while not done:
     player(player_x, player_y)
     enemy(enemy_x,enemy_y)
     bullet(bullet_x, bullet_y)
-    
+    scores(450,60)
     pygame.display.flip()
