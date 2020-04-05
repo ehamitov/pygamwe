@@ -19,9 +19,9 @@ enemy_y = random.randint(20, 50)
 enemy_dx = 1
 enemy_dy = 30
 
-hit = False
+strike = False
 press = False
-shoot = False
+fire = False
 
 def player(x, y): screen.blit(player_image,(x,y))
 def enemy(x, y): screen.blit(enemy_image,(x,y))
@@ -37,16 +37,16 @@ while not done:
             bullet_y = 480
             bullet_x = player_x + 20
             press = True
-            shoot = True
+            fire = True
     
     if enemy_x <= bullet_x <= enemy_x+50 and enemy_y <= bullet_y <= enemy_y+50:  
         bulet_y = 0
         bullet_x = 600
-        hit = True
+        strike = True
         enemy_x, enemy_y = random.randint(0, 534), random.randint(20, 50)
 
     if bullet_y == 0:
-        shoot = False
+        fire = False
         bullet_y = 600
         press = False
 
@@ -58,7 +58,7 @@ while not done:
         enemy_dx = -enemy_dx
         enemy_y += enemy_dy
 
-    if shoot is not False: bullet_y -= bullet_dy
+    if fire is not False: bullet_y -= bullet_dy
 
     screen.blit(background_image, (0, 0))
     player(player_x, player_y)
